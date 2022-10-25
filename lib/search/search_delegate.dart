@@ -68,14 +68,18 @@ class _MovieItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    movie.heroId = 'serarch-${movie.id}';
     return ListTile(
-      leading: FadeInImage(
-          image: NetworkImage(movie.fullPosterImg),
-          placeholder: AssetImage('assets/no-image.jpg'),
-          width: 50,
-          fit: BoxFit.contain),
+      leading: Hero(
+        tag: movie.heroId!,
+        child: FadeInImage(
+            image: NetworkImage(movie.fullPosterImg),
+            placeholder: const AssetImage('assets/no-image.jpg'),
+            width: 50,
+            fit: BoxFit.contain),
+      ),
       title: Text(movie.title),
-      subtitle: Text(movie.originalTitle),
+      subtitle: Text(movie.overview),
       onTap: () {
         Navigator.pushNamed(context, 'details', arguments: movie);
       },
